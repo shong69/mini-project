@@ -1,0 +1,5 @@
+package com.project.jsp.model.mapper;
+
+public interface BoardMapper {
+
+}

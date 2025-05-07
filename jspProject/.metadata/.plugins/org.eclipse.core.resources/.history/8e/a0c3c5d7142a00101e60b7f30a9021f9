@@ -1,0 +1,13 @@
+package com.project.jsp.model.service;
+
+import com.project.jsp.model.domain.Member;
+
+public class MemberService {
+
+	public Member login(String inputId, String inputPw) {
+		Member loginMember = new Member();
+	
+		return null;
+	}
+
+}

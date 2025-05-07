@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key = "login">
+		SELECT ID , NICKNAME , EMAIL
+		, JOINDATE
+		FROM MEMBER m 
+		WHERE NICKNAME = ?
+		AND PASSWORD = ?
+	</entry>	
+	<entry key="isDup">
+		SELECT ID
+		FROM MEMBER m
+		WHERE NICKNAME=?
+		AND EMAIL=?
+	</entry>
+	<entry key ="signup">
+		INSERT INTO MEMBER(NICKNAME, EMAIL,PASSWORD)
+		VALUES(?,?,?)
+	</entry>
+</properties>

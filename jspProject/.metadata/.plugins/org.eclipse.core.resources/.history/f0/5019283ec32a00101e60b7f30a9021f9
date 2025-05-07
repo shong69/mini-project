@@ -1,0 +1,21 @@
+package com.project.jsp.controller;
+
+import java.io.IOException;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+public class InsertController extends HttpServlet{
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.getRequestDispatcher("/WEB-INF/views/insert.jsp").forward(req, resp);
+	}
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		int id = req.getParameter("id");
+		String title = req.getParameter("title");
+		String content = req.getParameter("content");
+	}
+}

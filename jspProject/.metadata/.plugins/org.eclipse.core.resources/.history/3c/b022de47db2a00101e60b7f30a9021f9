@@ -1,0 +1,5 @@
+package com.project.jsp.model.dao;
+
+public class CommentDao {
+
+}

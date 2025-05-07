@@ -1,0 +1,10 @@
+package com.project.jsp.service;
+
+public class CommentService {
+
+	public int insert(int postId, int memberId, int parentCommentId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

@@ -1,0 +1,20 @@
+1746476220070	Move 'index.jsp' to 'views'
+1746476281032	Move 3 resources to 'resources'
+1746482821095	Move 'applicationContext.xml' to 'resources'
+1746483259643	Rename resource 'board.xml'
+1746483356090	Delete element
+1746483405661	Delete elements
+1746486968866	Copy compilation unit
+1746486975620	Rename type 'SiginController'
+1746487008167	Move 'login.jsp' to 'views'
+1746538728289	Copy file
+1746563304620	Delete element
+1746566631858	Rename resource 'edit.jsp'
+1746567350617	Rename type 'CreateController'
+1746567386706	Rename resource 'create.jsp'
+1746568862847	Delete element
+1746578186185	Copy file
+1746581562240	Rename resource 'KakaoTalk_20241020_000109394.jpg'
+1746581608811	Rename resource '1622541067.jpg'
+1746581627199	Rename resource '1622541047.jpg'
+1746581655012	Rename resource '000007 2.JPG'

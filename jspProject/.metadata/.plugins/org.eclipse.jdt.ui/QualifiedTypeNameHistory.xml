@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="java.sql.Date"/>
+    <fullyQualifiedTypeName name="org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer"/>
+    <fullyQualifiedTypeName name="WebApplicationInitializer"/>
+    <fullyQualifiedTypeName name="javax.servlet.ServletException"/>
+    <fullyQualifiedTypeName name="javax.servlet.ServletRegistration"/>
+    <fullyQualifiedTypeName name="javax.servlet.ServletContext"/>
+    <fullyQualifiedTypeName name="org.springframework.web.WebApplicationInitializer"/>
+    <fullyQualifiedTypeName name="jakarta.servlet.RequestDispatcher"/>
+    <fullyQualifiedTypeName name="com.mysql.cj.jdbc.Driver"/>
+    <fullyQualifiedTypeName name="java.util.logging.Level"/>
+    <fullyQualifiedTypeName name="java.util.logging.Logger"/>
+    <fullyQualifiedTypeName name="com.project.jsp.model.domain.Member"/>
+    <fullyQualifiedTypeName name="java.sql.Statement"/>
+    <fullyQualifiedTypeName name="jakarta.servlet.http.HttpServlet"/>
+    <fullyQualifiedTypeName name="org.eclipse.tags.shaded.org.apache.xml.dtm.ref.DTMDefaultBaseIterators.ParentIterator"/>
+    <fullyQualifiedTypeName name="com.project.jsp.util.Mysql"/>
+    <fullyQualifiedTypeName name="com.project.jsp.model.domain.Comment"/>
+</qualifiedTypeNameHistroy>

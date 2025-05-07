@@ -1,0 +1,5 @@
+package com.project.jsp.controller;
+
+public class BoardController{
+
+}

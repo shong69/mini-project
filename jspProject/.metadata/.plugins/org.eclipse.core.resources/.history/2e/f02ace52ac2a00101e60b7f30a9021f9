@@ -1,0 +1,35 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="resources/css/main.css">
+</head>
+<body>
+	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+	
+	<main>
+		<h1>로그인</h1>
+		<form action="login" method="post" class="login-form">
+		    <h2>로그인</h2>
+		    <div class="input-group">
+		        <label for="inputId">닉네임</label>
+		        <input type="text" name="inputId" id="inputId" placeholder="닉네임을 입력하세요" required>
+		    </div>
+		    <div class="input-group">
+		        <label for="inputPw">비밀번호</label>
+		        <input type="password" name="inputPw" id="inputPw" placeholder="비밀번호를 입력하세요" required>
+		    </div>
+		    <button type="submit">로그인</button>
+		    <div class="signup-link">
+		        <a href="/myReceipt2/signup">회원가입</a>
+		    </div>
+		</form>
+
+	</main>
+
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+</body>
+</html>

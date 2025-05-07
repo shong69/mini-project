@@ -1,0 +1,14 @@
+package com.project.jsp.model.service;
+
+import java.util.List;
+
+import com.project.jsp.model.domain.Post;
+
+public class BoardService {
+
+	public static List<Post> getAllPost() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

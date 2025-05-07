@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- MyBatis 설정 -->
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <!-- 매퍼 파일 경로 설정 -->
+    <mappers>
+        <!-- 클래스패스로 매퍼 파일을 등록 -->
+        <mapper resource="mapper/ExampleMapper.xml"/> <!-- 예시로 ExampleMapper.xml 매퍼 파일 경로 -->
+    </mappers>
+
+</configuration>

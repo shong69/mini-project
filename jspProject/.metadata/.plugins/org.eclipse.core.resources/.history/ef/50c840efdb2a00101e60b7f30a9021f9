@@ -1,0 +1,36 @@
+package com.project.jsp.model.dao;
+
+import java.io.FileInputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.Properties;
+
+import com.project.jsp.model.domain.Comment;
+
+public class CommentDao {
+	private PreparedStatement pstmt;
+	private Statement stmt;
+	private ResultSet rs;
+	private Properties prop;
+	
+	public CommentDao() {
+		try {
+			prop = new Properties();
+			String filePath = 
+					Comment.class.getResource("/com/project/jsp/util/sql/comment-sql.xml").getPath();
+			
+			prop.loadFromXML(new FileInputStream(filePath));
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public int insert(Connection conn, int postId, int memberId, int parentCommentId) {
+		int result =0;
+		
+		return 0;
+	}
+
+}

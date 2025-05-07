@@ -1,0 +1,121 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Sign up</title>
+<link rel="stylesheet" type="text/css" href="resources/css/main.css">
+<style>
+/* 전체 폼 컨테이너 스타일 */
+.signup-form {
+    width: 100%;
+    max-width: 400px;
+    margin: 60px auto;
+    padding: 40px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* 제목 */
+.signup-form h2 {
+    font-size: 26px;
+    margin-bottom: 25px;
+    color: #333;
+    text-align: center;
+}
+
+/* 라벨용 p 태그 */
+.signup-form p {
+    margin: 10px 0 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+/* 입력창 */
+.signup-form input[type="text"],
+.signup-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 3px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    box-sizing: border-box;
+    transition: border 0.3s;
+}
+
+.signup-form input:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+/* 메시지 출력용 span */
+.signup-form span {
+    display: block;
+    margin-top: 5px;
+    font-size: 12px;
+    color: #888;
+}
+
+/* 메시지 강조 색 (비밀번호 불일치 등) */
+#pwMessage, #nameMessage, #idMsg {
+    font-size: 12px;
+}
+
+/* 버튼 스타일 */
+.signup-form button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 25px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.signup-form button:hover {
+    background-color: #2980b9;
+}
+
+</style>
+<script type="text/javascript" src="resources/js/jquery-3.1.1.min.js"></script>
+<script>
+
+</script>
+</head>
+<body>
+	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+	<main>
+		<form action= "/sign" method="post" class="signup-form" onsubmit="return validate()">
+			<h2>회원 가입</h2>
+			<p>아이디</p>
+			<input type="text" name="inputId" id="inputId" autocomplete="off" required> 
+			<span id="idMsg">영어 소문자, 숫자, 특수문자 포함 6~14글자</span>
+				
+			<p>비밀번호</p>
+			<input type="password" name="inputPw" id="inputPw" required>
+			
+			<p>비밀번호 확인</p>
+			<input type="password" name="inputPw2" id="inputPw2" required>
+			<span id="pwMessage"></span>
+			
+			<p>닉네임</p>
+			<input type="text" name="inputName" id="inputName" required>
+			<span id="nameMessage"></span>
+			<br>
+			
+			<button>가입하기</button>
+			
+		</form>
+	</main>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+</body>
+</html>

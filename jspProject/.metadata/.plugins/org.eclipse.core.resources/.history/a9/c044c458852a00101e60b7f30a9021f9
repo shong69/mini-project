@@ -1,0 +1,63 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Board</title>
+<link rel="stylesheet" type="text/css" href="resources/css/main.css">
+<script type="text/javascript" src="resources/js/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+    <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+    <main class="main-content">
+        <form action="boardList" method="get" class="search-form">
+            <select class="category-select">
+                <option value="">All</option>
+                <option value="title">Title</option>
+                <option value="nickname">Nickname</option>
+            </select>
+            <input type="text" name="search" placeholder="Search..." class="search-input"/>
+            <button type="submit" class="search-button">Search</button>
+        </form>
+        
+        <table class="post-table">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Title</th>
+                    <th>NickName</th>
+                    <th>Date</th>
+                    <th>Comments</th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:choose>
+                    <c:when test="${empty postList}">
+                        <tr><td colspan="5"><h2>No posts available.</h2></td></tr>
+                    </c:when>
+                    <c:otherwise>
+                        <c:forEach var="post" items="${postList}">
+                            <tr>
+                                <td>${post.id}</td>
+                                <td><a href="/myReceipt2/detail?id=${post.id}" class="post-title">${post.title}</a></td>
+                                <td>${post.nickName}</td>
+                                <td>${post.date}</td>
+                                <td>${post.commentCount}</td>
+                            </tr>
+                        </c:forEach>
+                    </c:otherwise>
+                </c:choose>
+            </tbody>
+        </table>
+
+        <c:if test="${not empty sessionScope.loginMember}">
+            <div class="create-post">
+                <a href="/myReceipt2/insert" class="create-post-btn">Create New Post</a>
+            </div>
+        </c:if>
+    </main>
+
+    <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+</body>
+</html>

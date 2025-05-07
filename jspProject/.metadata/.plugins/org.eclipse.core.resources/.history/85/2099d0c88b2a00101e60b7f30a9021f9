@@ -1,0 +1,100 @@
+package com.project.jsp.model.dao;
+
+import java.io.FileInputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
+
+import com.project.jsp.model.domain.Post;
+
+public class BoardDao {
+	public static final int PAGE_SIZE = 10;
+	private PreparedStatement pstmt;
+	private Statement stmt;
+	private ResultSet rs;
+	private Properties prop;
+	public BoardDao() {
+		try {
+			prop = new Properties();
+			String filePath = 
+					Post.class.getResource("/com/project/jsp/util/sql/board-sql.xml").getPath();
+			
+			prop.loadFromXML(new FileInputStream(filePath));
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public List<Post> getAllPost(Connection conn, int pageNum, String category, String searchKeyword) {
+		List<Post> postList = new ArrayList<>();;
+		try {
+			String sql = prop.getProperty("getAllPost");
+			pstmt = conn.prepareStatement(sql);
+			if(category != null && !category.isEmpty() && searchKeyword != null && !searchKeyword.isEmpty()) {
+				pstmt.setString(1,"%"+searchKeyword+"%");
+			}
+			pstmt.setInt(2, (pageNum-1)*PAGE_SIZE);
+			pstmt.setInt(3, PAGE_SIZE);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Post post = new Post();
+				post.setId(rs.getInt("id"));
+				post.setNickName(rs.getString("nickname"));
+				post.setTitle(rs.getString("title"));
+				post.setContent(rs.getString("content"));
+				post.setDate(rs.getDate("date"));
+				post.setCommentCount(rs.getInt("comment_count"));
+				postList.add(post);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs != null)
+					rs.close();
+				if(pstmt!= null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
+		return postList;
+	}
+
+	public int getTotalPostsCount(Connection conn, String category, String searchKeyword) {
+		int totalCount = 0;
+		
+		try {
+			String sql = prop.getProperty("getTotalPostsCount");
+			pstmt = conn.prepareStatement(sql);
+	        if (category != null && !category.isEmpty() && searchKeyword != null && !searchKeyword.isEmpty()) {
+	            pstmt.setString(1, "%" + searchKeyword + "%");
+	        }
+
+	        ResultSet rs = pstmt.executeQuery();
+	        if (rs.next()) {
+	            totalCount = rs.getInt(1);
+	        }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(rs!= null)rs.close();
+			if(pstmt != null)pstmt.close();
+		}
+
+		return 0;
+	}
+
+
+
+
+}

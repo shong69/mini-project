@@ -1,0 +1,83 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="resources/css/main.css">
+<style>
+.update-form {
+    max-width: 700px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.update-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.update-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.update-form input[type="text"],
+.update-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.update-form textarea {
+    min-height: 200px;
+    resize: vertical;
+}
+
+.update-form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.update-form button:hover {
+    background-color: #2980b9;
+}
+</style>
+<script type="text/javascript" src="resources/js/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+    <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+    <main>
+        <form action="/myReceipt2/update" method="post">
+	    	<h2>게시글 수정</h2>
+	    	<input type="hidden" name="id" value=${post.id}/>
+	    	
+	    	<label for="title">제목</label>
+		    <input name="title" type="text" id="title" value="${post.title}" required/>
+	    	
+	    	<label for="content">내용</label>
+	        <textarea name="content" id="content" required>${post.content}</textarea>
+	
+	        <button type="submit">수정 완료</button>
+	    </form>
+    </main>
+    <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>My Receipt</title>
+<link rel="stylesheet" type="text/css" href="resources/css/main.css">
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+
+<script type="text/javascript" src="resources/js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('#carousel').slick({
+		  dots: false,
+		  infinite: true,
+		  speed: 500,
+		  fade: true,
+		  cssEase: 'linear'
+	});
+});
+
+</script>
+</head>
+<body>
+	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+	<main>
+		<div class="section-title">사진 모아보기</div>
+		<!-- 캐러셀 하나 두기 -->
+		<div id="carousel">
+			<div><img src="/resources/imgs/carousel1.jpg"></div>
+			<div><img src="/resources/imgs/carousel2.jpg"></div>
+			<div><img src="/resources/imgs/carousel3.jpg"></div>
+			<div><img src="/resources/imgs/carousel4.jpg"></div>
+		</div>
+		<div style="height:1000px;"></div>
+	</main>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+</body>
+</html>

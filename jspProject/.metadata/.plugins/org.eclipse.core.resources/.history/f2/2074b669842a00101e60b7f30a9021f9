@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key = "getAllPost">
+		SELECT p.ID , p.MEMBERID , p.TITLE, p.CONTENT,m.NICKNAME, 
+		(SELECT COUNT(*) FROM COMMENT c WHERE c.POST_ID =p.ID) as COMMENT_COUNT
+		, DATE
+		FROM POST p 
+		JOIN MEMBER m ON p.MEMBERID = m.ID;
+		WHERE IS_DEL = '0'
+		ORDER BY p.ID DESC
+	</entry>	
+	
+</properties>

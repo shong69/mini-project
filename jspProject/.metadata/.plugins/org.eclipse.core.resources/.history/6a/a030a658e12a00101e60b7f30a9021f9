@@ -1,0 +1,123 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>My Receipt</title>
+<link rel="stylesheet" type="text/css" href="resources/css/main.css">
+ <style>
+ main {
+ 	color:white;
+ 	}
+  .container {
+    max-width: 900px;
+    margin: 90px auto;
+    background: white;
+    padding: 70px 40px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  }
+
+  h1 {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+    color: #34495e;
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+  main section{
+  	margin : 50px 0;
+  }
+  .container p, .container li {
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  ul {
+    padding-left: 20px;
+  }
+
+  .btn-write {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #3498db;
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+    text-decoration: none;
+    margin-top: 30px;
+    transition: background-color 0.3s;
+  }
+
+  .btn-write:hover {
+    background-color: #2b7cb8;
+  }
+
+  .highlight {
+  	color: gray;
+    background: #ecf7ff;
+    border-left: 4px solid #3498db;
+    padding: 10px 15px;
+    margin-top: 10px;
+    border-radius: 6px;
+    line-height:30px;
+  }
+ </style>
+
+</head>
+<body>
+	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+	<main>
+	 <div class="container">
+	    <h1>My Receipt 소개</h1>
+	
+	    <section>
+	      <h2>📌 My Receipt란?</h2>
+	      <p>My Receipt는 맛집 탐방 후기를 공유하고, 다른 사람과 정보를 나눌 수 있는 공간입니다. 누구나 쉽게 정직한 후기를 남기고, 신뢰할 수 있는 리뷰를 찾아볼 수 있어요.</p>
+	    </section>
+	
+	    <section>
+	      <h2>✍️ 후기 작성 가이드</h2>
+	      <ul>
+	        <li>방문한 가게의 이름과 위치를 정확하게 작성해 주세요.</li>
+	        <li>음식의 맛, 분위기, 가격 등을 구체적으로 표현해 주세요.</li>
+	        <li>사진을 함께 업로드하면 신뢰도가 높아져요.</li>
+	        <li>복붙보다는 나만의 경험을 진솔하게 써 주세요.</li>
+	      </ul>
+	    </section>
+	
+	    <section>
+	      <h2>🚫 금지되는 내용</h2>
+	      <ul>
+	        <li>욕설, 비방, 인신공격성 내용</li>
+	        <li>광고, 홍보를 목적으로 한 글</li>
+	        <li>직접 방문하지 않은 가게의 허위 후기</li>
+	      </ul>
+	    </section>
+	
+	    <section>
+	      <h2>✅ 좋은 후기 예시</h2>
+	      <div class="highlight">
+	        "성수동 ○○카페는 분위기가 조용해서 작업하기 딱 좋아요. 시그니처 라떼가 고소하고 부드러워서 감탄했어요. 
+	        <br/>직원분들도 친절해서 재방문 의사 있습니다!"
+	      </div>
+	    </section>
+	
+	    <section>
+	      <a href="/insert" class="btn-write">후기 작성하러 가기</a>
+	    </section>
+	  </div>
+
+    </main>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+</body>
+</html>

@@ -1,0 +1,32 @@
+package com.project.jsp.model.service;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import com.project.jsp.model.dao.MemberDao;
+import com.project.jsp.model.domain.Member;
+import com.project.jsp.util.Mysql;
+
+public class MemberService {
+	private static MemberDao dao = new MemberDao();
+	
+	public Member login(String inputId, String inputPw) {
+		Connection conn=null;
+		Member loginMember = null;
+		try {
+			conn = Mysql.getConnection();
+			loginMember = dao.login(conn,inputId,inputPw);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+				try {
+					if(conn!= null)
+						conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+		return loginMember;
+	}
+
+}

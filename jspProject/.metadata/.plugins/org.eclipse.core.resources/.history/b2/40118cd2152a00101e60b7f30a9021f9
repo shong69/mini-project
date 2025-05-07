@@ -1,0 +1,17 @@
+package com.project.jsp.model.service;
+
+import java.sql.Connection;
+
+import com.project.jsp.model.domain.Member;
+import com.project.jsp.util.Mysql;
+
+public class MemberService {
+	private MemberDao dao = new MemberDao();
+	public Member login(String inputId, String inputPw) {
+		Connection conn = Mysql.getConnection();
+		Member loginMember = mem
+	
+		return null;
+	}
+
+}

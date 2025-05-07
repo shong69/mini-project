@@ -1,0 +1,32 @@
+package com.project.jsp.model.service;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import com.project.jsp.model.dao.CommentDao;
+import com.project.jsp.util.Mysql;
+
+public class CommentService {
+
+	public int insert(int postId, int memberId, String content, int parentCommentId) {
+		Connection conn = null;
+		int result = 0;
+		CommentDao dao = new CommentDao();
+		
+		try {
+			conn = Mysql.getConnection();
+			result = dao.insert(conn, postId, memberId, parentCommentId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(conn!=null) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return result;
+	}
+
+}

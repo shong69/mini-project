@@ -1,0 +1,92 @@
+package com.project.jsp.model.service;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
+
+import com.project.jsp.model.dao.BoardDao;
+import com.project.jsp.model.domain.Comment;
+import com.project.jsp.model.domain.Post;
+import com.project.jsp.util.Mysql;
+
+public class BoardService {
+	public static final int PAGE_SIZE = 10;
+
+	public static List<Post> getAllPost(int pageNum, String category, String searchKeyword) {
+		Connection conn = null;
+		List<Post> postList = null;
+		BoardDao dao = new BoardDao();
+		try {
+			conn = Mysql.getConnection();
+			postList = dao.getAllPost(conn, pageNum, category, searchKeyword);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(conn!=null) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return postList;
+	}
+
+	public int getTotalPostsCount(String category, String searchKeyword) {
+		Connection conn = null;
+		int totalPostsCount = 0;
+		BoardDao dao = new BoardDao();
+		try {
+			conn = Mysql.getConnection();
+			totalPostsCount = dao.getTotalPostsCount(conn, category, searchKeyword);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+				try {
+					if(conn!= null) conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+		return totalPostsCount;
+	}
+
+	public Post getPost(int postId) {
+		Connection conn = null;
+		Post post = null;
+		BoardDao dao = new BoardDao();
+		try {
+			conn = Mysql.getConnection();
+			post = dao.getPost(conn, postId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(conn!=null) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return post;
+	}
+
+	public List<Comment> getCommentsByPostId(int postId) {
+		Connection conn = null;
+		List<Comment> commentList = null;
+		BoardDao dao = new BoardDao();
+		try {
+			conn = Mysql.getConnection();
+			commentList = dao.getCommentByPostId(conn, postId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+				try {
+					if(conn!=null) conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+		return commentList;
+	}
+
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key = "getAllPost">
+		SELECT ID , MEMBERID , TITLE, CONTENT
+		, DATE
+		FROM BOARD b 
+		WHERE IS_DEL = 0;
+	</entry>	
+	
+</properties>

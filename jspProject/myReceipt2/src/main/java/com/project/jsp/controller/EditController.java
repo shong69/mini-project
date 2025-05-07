@@ -1,0 +1,45 @@
+package com.project.jsp.controller;
+
+import java.io.IOException;
+
+import com.project.jsp.model.domain.Post;
+import com.project.jsp.model.service.BoardService;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+public class EditController extends HttpServlet {
+	BoardService boardService = new BoardService();
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int postId = Integer.parseInt(req.getParameter("id"));
+        Post post = boardService.getPost(postId);
+        
+        req.setAttribute("post", post);
+        req.getRequestDispatcher("/WEB-INF/views/update.jsp").forward(req, resp);
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int postId = Integer.parseInt(req.getParameter("id"));
+        String title = req.getParameter("title");
+        String content = req.getParameter("content");
+
+        Post post = new Post();
+        post.setId(postId);
+        post.setTitle(title);
+        post.setContent(content);
+
+        // 게시글 수정 처리
+        boolean isUpdated = boardService.updatePost(post);
+
+        if (isUpdated) {
+            resp.sendRedirect("/myReceipt2/detail?id=" + postId); // 수정된 게시글 보기로 리디렉션
+        } else {
+            resp.sendRedirect("/myReceipt2/update?id=" + postId); // 수정 실패 시 다시 수정 페이지로 리디렉션
+        }
+	}
+}

@@ -1,0 +1,37 @@
+package com.project.jsp.controller;
+
+import java.io.IOException;
+
+import com.project.jsp.model.domain.Member;
+import com.project.jsp.model.service.MemberService;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
+public class LoginController extends HttpServlet{
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);
+	}
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String inputId = req.getParameter("inputId");
+		String inputPw = req.getParameter("inputPw");
+		MemberService service = new MemberService();
+		Member loginMember = service.login(inputId, inputPw);
+		
+		HttpSession session = req.getSession();
+		if(loginMember != null) {
+			session.setAttribute("loginMember", loginMember);
+			session.setMaxInactiveInterval(60*60);
+			resp.sendRedirect("/myReceipt2/index");
+		}else {
+			session.setAttribute("message", "로그인에 실패하였습니다.(id or password not correct)");
+			resp.sendRedirect("/myReceipt2/login");
+		}
+		
+	}
+}

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="getAllPost">
+		SELECT p.ID , p.MEMBERID , p.TITLE, p.CONTENT,m.NICKNAME, 
+		(SELECT COUNT(*) FROM COMMENT c WHERE c.POST_ID = p.ID) AS COMMENT_COUNT,
+		p.DATE
+		FROM POST p 
+		JOIN MEMBER m ON p.MEMBERID = m.ID
+		WHERE p.IS_DEL = '0'
+		ORDER BY p.DATE DESC
+		LIMIT ?,?;
+	</entry>	
+
+	<entry key="searchByTitle">
+		SELECT p.ID, p.MEMBERID, p.TITLE, p.CONTENT, m.NICKNAME, 
+		(SELECT COUNT(*) FROM COMMENT c WHERE c.POST_ID = p.ID) AS COMMENT_COUNT,
+		p.DATE
+		FROM POST p
+		JOIN MEMBER m ON p.MEMBERID = m.ID
+		WHERE p.IS_DEL = '0'
+		AND p.TITLE LIKE ?
+		ORDER BY p.DATE DESC
+		LIMIT ?,?;
+	</entry>
+
+	<entry key="searchByNickname">
+		SELECT p.ID, p.MEMBERID, p.TITLE, p.CONTENT, m.NICKNAME, 
+		(SELECT COUNT(*) FROM COMMENT c WHERE c.POST_ID = p.ID) AS COMMENT_COUNT,
+		p.DATE
+		FROM POST p
+		JOIN MEMBER m ON p.MEMBERID = m.ID
+		WHERE p.IS_DEL = '0'
+		AND m.NICKNAME LIKE ?
+		ORDER BY p.DATE DESC
+		LIMIT ?,?;
+	</entry>
+	<entry key="searchByAll">
+		SELECT p.ID, p.MEMBERID, p.TITLE, p.CONTENT, m.NICKNAME,
+	           (SELECT COUNT(*) FROM COMMENT c WHERE c.POST_ID = p.ID) AS COMMENT_COUNT,
+	           p.DATE
+	    FROM POST p
+	    JOIN MEMBER m ON p.MEMBERID = m.ID
+	    WHERE p.IS_DEL = '0'
+	    AND (p.TITLE LIKE ? OR m.NICKNAME LIKE ?)
+	    ORDER BY p.DATE DESC
+	    LIMIT ?, ?
+	</entry>
+
+	<entry key="countAllPost">
+		SELECT COUNT(*) 
+		FROM POST p
+		WHERE p.IS_DEL = '0';
+	</entry>
+
+	<entry key="countByTitle">
+		SELECT COUNT(*)
+		FROM POST p
+		WHERE p.IS_DEL = '0'
+		AND p.TITLE LIKE ?;
+	</entry>
+
+	<entry key="countByNickname">
+		SELECT COUNT(*)
+		FROM POST p
+		JOIN MEMBER m ON p.MEMBERID = m.ID
+		WHERE p.IS_DEL = '0'
+		AND m.NICKNAME LIKE ?;
+	</entry>
+	<entry key="getPostById">
+		SELECT p.ID, p.TITLE, p.CONTENT, p.MEMBERID, m.NICKNAME, p.DATE,
+			(SELECT COUNT(*) FROM COMMENT c WHERE c.POST_ID = p.ID) AS COMMENT_COUNT
+		FROM POST p
+		JOIN MEMBER m ON p.MEMBERID = m.ID
+		WHERE p.ID = ? AND p.IS_DEL = '0';
+	</entry>
+	
+	<entry key="getCommentByPostId">
+		SELECT c.ID, c.CONTENT, c.CREATE_DATE, m.NICKNAME, c.PARENT_ID
+		FROM COMMENT c
+		JOIN MEMBER m ON c.MEMBERID = m.ID
+		WHERE c.POST_ID = ?
+		ORDER BY 
+		  CASE WHEN c.PARENT_ID IS NULL THEN c.ID ELSE c.PARENT_ID END, 
+		  c.PARENT_ID, 
+		  c.CREATE_DATE
+
+	</entry>
+	<entry key="deletePost">
+		DELETE FROM POST WHERE ID=?
+	</entry>
+	<entry key="updatePost">
+		UPDATE POST SET title = ?, content = ? WHERE id = ?
+	</entry>
+	<entry key="insert">
+		INSERT INTO POST(MEMBERID, TITLE, CONTENT,DATE) VALUES(?,?,?,now())
+	</entry>
+</properties>

@@ -1,0 +1,23 @@
+package com.project.jsp.model.service;
+
+import java.sql.Connection;
+import java.util.List;
+
+import com.project.jsp.model.dao.MemberDao;
+import com.project.jsp.model.domain.Post;
+import com.project.jsp.util.Mysql;
+
+public class BoardService {
+
+	public static List<Post> getAllPost() {
+		Connection conn = null;
+		List<Post> postList = null;
+		MemberDao dao = new MemberDao();
+		
+		conn = Mysql.getConnection();
+		postList = dao.getAllPost();
+		
+		return null;
+	}
+
+}

@@ -1,0 +1,20 @@
+package com.project.jsp.model.service;
+
+import java.sql.Connection;
+
+import com.project.jsp.model.dao.CommentDao;
+import com.project.jsp.util.Mysql;
+
+public class CommentService {
+
+	public int insert(int postId, int memberId, int parentCommentId) {
+		Connection conn = null;
+		int result = 0;
+		CommentDao dao = new CommentDao();
+		
+		conn = Mysql.getConnection();
+		
+		return 0;
+	}
+
+}

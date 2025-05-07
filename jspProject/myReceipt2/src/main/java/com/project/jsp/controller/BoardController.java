@@ -1,0 +1,44 @@
+package com.project.jsp.controller;
+
+import java.io.IOException;
+import java.util.List;
+
+import com.project.jsp.model.domain.Post;
+import com.project.jsp.model.service.BoardService;
+
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+public class BoardController extends HttpServlet{
+
+	BoardService boardService = new BoardService();
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		int pageNum = 1;
+		String searchKeyword = req.getParameter("search");
+		String category = req.getParameter("category");
+
+		if(req.getParameter("pageNum")!=null) {
+			pageNum = Integer.parseInt(req.getParameter("pageNum"));
+		}
+		List<Post> postList = boardService.getAllPost(pageNum, category, searchKeyword);
+		
+		
+		int totalPosts = boardService.getTotalPostsCount(category, searchKeyword);
+		int totalPages = (int)Math.ceil((double)totalPosts/BoardService.PAGE_SIZE);
+		
+		
+		
+		req.setAttribute("postList",postList);
+		req.setAttribute("totalPages", totalPages);
+		req.setAttribute("pageNum", pageNum);
+		req.setAttribute("searchKeyword", searchKeyword);
+		req.setAttribute("category", category);
+		
+		req.getRequestDispatcher("/WEB-INF/views/board.jsp").forward(req, resp);
+	}
+	
+}

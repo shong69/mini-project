@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="insert">
+		INSERT INTO COMMENT(POST_ID, MEMBERID, CONTENT,PARENT_ID,CREATE_DATE) VALUES(?,?,?,?,now())
+	</entry>	
+
+
+</properties>

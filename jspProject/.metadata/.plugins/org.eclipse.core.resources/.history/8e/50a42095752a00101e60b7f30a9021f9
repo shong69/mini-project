@@ -1,0 +1,30 @@
+package com.project.jsp.model.service;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
+
+import com.project.jsp.model.dao.BoardDao;
+import com.project.jsp.model.domain.Post;
+import com.project.jsp.util.Mysql;
+
+public class BoardService {
+	private BoardDao dao = new BoardDao();
+
+	public static List<Post> getAllPost() {
+		Connection conn = null;
+		List<Post> postList = null;
+		
+		try {
+			conn = Mysql.getConnection();
+			postList = dao.getAllPost(conn);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			conn.close();
+		}
+		
+		return null;
+	}
+
+}

@@ -1,0 +1,26 @@
+package com.project.jsp.controller;
+
+import java.io.IOException;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+public class CommentController extends HttpServlet{
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		int postId = Integer.parseInt(req.getParameter("postId"));
+		String content = req.getParameter("content");
+		int memberId = Integer.parseInt(req.getParameter("id"));
+		int parentCommentId;
+		if(req.getParameter("parentCommentId")!=null) {
+			parentCommentId= Integer.parseInt(req.getParameter("parentCommentId"));
+		}
+		
+		CommentService service = new CommentService();
+		int result = service.insert(postId, memberId, parentC)
+		
+	}
+}

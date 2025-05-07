@@ -1,0 +1,283 @@
+package com.project.jsp.model.dao;
+
+import java.io.FileInputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+
+import com.project.jsp.model.domain.Comment;
+import com.project.jsp.model.domain.Post;
+
+public class BoardDao {
+	public static final int PAGE_SIZE = 10;
+	private PreparedStatement pstmt;
+	private Statement stmt;
+	private ResultSet rs;
+	private Properties prop;
+	public BoardDao() {
+		try {
+			prop = new Properties();
+			String filePath = 
+					Post.class.getResource("/com/project/jsp/util/sql/board-sql.xml").getPath();
+			
+			prop.loadFromXML(new FileInputStream(filePath));
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public List<Post> getAllPost(Connection conn, int pageNum, String category, String searchKeyword) {
+		List<Post> postList = new ArrayList<>();;
+		try {
+            String queryKey = "getAllPost";
+            if (searchKeyword != null && !searchKeyword.isEmpty()) {
+                if ("title".equals(category)) queryKey = "searchByTitle";
+                else if ("nickname".equals(category)) queryKey = "searchByNickname";
+                else queryKey = "searchByAll";
+            }
+			String sql = prop.getProperty(queryKey);
+			pstmt = conn.prepareStatement(sql);
+            int offset = (pageNum - 1) * 10;
+
+			if("searchByAll".equals(queryKey)) {
+			    pstmt.setString(1, "%" + searchKeyword + "%");
+			    pstmt.setString(2, "%" + searchKeyword + "%");
+			    pstmt.setInt(3, offset);
+			    pstmt.setInt(4, 10);
+			}else if (queryKey.equals("getAllPost")) {
+                pstmt.setInt(1, offset);
+                pstmt.setInt(2, 10);
+            } else {
+                pstmt.setString(1, "%" + searchKeyword + "%");
+                pstmt.setInt(2, offset);
+                pstmt.setInt(3, 10);
+            }
+            rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Post post = new Post();
+				post.setId(rs.getInt("id"));
+				post.setNickName(rs.getString("nickname"));
+				post.setTitle(rs.getString("title"));
+				post.setContent(rs.getString("content"));
+				post.setDate(rs.getDate("date"));
+				post.setCommentCount(rs.getInt("comment_count"));
+				postList.add(post);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs != null)
+					rs.close();
+				if(pstmt!= null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
+		return postList;
+	}
+
+	public int getTotalPostsCount(Connection conn, String category, String searchKeyword) {
+		int totalCount = 0;
+		
+		try {
+			String queryKey = "countAllPost";
+	        if (category != null && !category.isEmpty() && searchKeyword != null && !searchKeyword.isEmpty()) {
+	            if (category.equals("title")) {
+	                queryKey = "countByTitle";
+	            } else if (category.equals("nickname")) {
+	                queryKey = "countByNickname";
+	            }
+	        }
+			String sql = prop.getProperty(queryKey);
+			pstmt = conn.prepareStatement(sql);
+			
+	        if (!queryKey.equals("countAllPost")) {
+	            pstmt.setString(1, "%" + searchKeyword + "%");
+	        }
+
+	        rs = pstmt.executeQuery();
+	        if (rs.next()) {
+	            totalCount = rs.getInt(1);
+	        }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+				try {
+					if(rs!= null)rs.close();
+					if(pstmt != null)pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+
+		return totalCount;
+	}
+
+	public Post getPost(Connection conn, int postId) {
+		Post post = null;
+		try {
+			String sql = prop.getProperty("getPostById");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, postId);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				post = new Post();
+	            post.setId(rs.getInt("ID"));
+	            post.setTitle(rs.getString("TITLE"));
+	            post.setContent(rs.getString("CONTENT"));
+	            post.setNickName(rs.getString("NICKNAME"));
+	            post.setDate(rs.getDate("DATE"));
+	            post.setCommentCount(rs.getInt("COMMENT_COUNT"));
+	            post.setMemberId(rs.getInt("MEMBERID"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return post;
+	}
+
+	public List<Comment> getCommentByPostId(Connection conn, int postId) {
+		List<Comment> commentList = new ArrayList<>();
+		Map<Integer, Comment> commentMap = new HashMap<>();
+		try {
+			String sql = prop.getProperty("getCommentByPostId");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, postId);
+			rs = pstmt.executeQuery();
+			
+	        while (rs.next()) {
+	            Comment c = new Comment();
+	            c.setId(rs.getInt("ID"));
+	            c.setPostId(postId);
+	            c.setMemberNickname(rs.getString("NICKNAME"));
+	            c.setContent(rs.getString("CONTENT"));
+	            c.setDate(rs.getDate("CREATE_DATE"));
+	            c.setParentCommentId(rs.getInt("PARENT_ID"));
+	            commentList.add(c);
+	        }
+	        
+	        for (Comment comment : commentMap.values()) {
+	            if (comment.getParentCommentId() == 0) {
+	                commentList.add(comment);
+	            } else {
+	                Comment parentComment = commentMap.get(comment.getParentCommentId());
+	                if (parentComment != null) {
+	                    parentComment.addReply(comment);
+	                }
+	            }
+	        }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return commentList;
+	}
+
+	public boolean deletePost(Connection conn, int postId) {
+		boolean result = false;
+		
+		try {
+			String sql = prop.getProperty("deletePost");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, postId);
+			int Qresult = pstmt.executeUpdate();
+			if(Qresult>0) {
+				result = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(pstmt!=null)pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+
+	public boolean updatePost(Connection conn, Post post) {
+		 boolean isUpdated = false;
+		    try {
+		        String sql = prop.getProperty("updatePost");
+		        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+		            pstmt.setString(1, post.getTitle());
+		            pstmt.setString(2, post.getContent());
+		            pstmt.setInt(3, post.getId());
+
+		            int Qresult = pstmt.executeUpdate();
+		            if (Qresult > 0) {
+		                isUpdated = true;
+		            }
+		        }
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    } finally {
+				try {
+					if(pstmt!=null)pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		    }
+		    return isUpdated;		
+	}
+
+	public int insert(Connection conn, int id, String title, String content) {
+		int generatedId = -1;
+		try {
+	        String sql = prop.getProperty("insert");
+	        try (PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+	            pstmt.setInt(1, id);
+	            pstmt.setString(2, title);
+	            pstmt.setString(3, content);
+
+	            int Qresult = pstmt.executeUpdate();
+	            if (Qresult > 0) {
+	                try (ResultSet rs = pstmt.getGeneratedKeys()) {
+	                    if (rs.next()) {
+	                        generatedId = rs.getInt(1);
+	                    }
+	                }
+	            }
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+			try {
+				if(pstmt!=null)pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	    }
+		return generatedId;
+	}
+
+
+
+
+}
