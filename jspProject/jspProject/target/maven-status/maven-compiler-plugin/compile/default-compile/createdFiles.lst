@@ -1,9 +1,0 @@
-com\project\jsp\model\domain\Comment.class
-com\project\jsp\controller\IndexController.class
-com\project\jsp\util\LoginInterceptor.class
-com\project\jsp\model\domain\Member.class
-WebConfig.class
-com\project\jsp\controller\LoginController.class
-com\project\jsp\model\domain\Post.class
-com\project\jsp\controller\BoardController.class
-WebApplicationInitializer.class
