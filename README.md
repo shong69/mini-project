@@ -10,13 +10,7 @@
 | [inkTalk](./inkTalk) | 실시간 채팅 기능을 포함한 웹 채팅+그림 그리기 서비스 | GUI, JAVA, Spring FrameWork |
 | [jspProject](./jspProject) | JSP 기반의 간단한 게시판 웹 애플리케이션 | Java, JSP, Servlet, jQuery, MySQL, Srping FrameWork |
 
-## 🔧 실행 방법
 
-각 프로젝트 폴더에 들어가서 해당 `README.md` 파일의 실행 방법을 참고해주세요.
-
-
-cd inkTalk  # 또는 jspProject
-# README.md 참고하여 실행
 📌 참고사항
 모든 프로젝트는 개인 학습 및 포트폴리오 목적입니다.
 
@@ -33,7 +27,7 @@ GUI와 Java Websocket을 활용한 실시간 채팅 애플리케이션입니다.
 사용자는 닉네임으로 입장해 실시간으로 메시지를 주고받을 수 있습니다.
 
 ## 🛠️ 사용 기술
-- JAVA GUI
+- JAVA Swing
 - JAVA Websocket
 - Spring Framework
 
@@ -47,7 +41,7 @@ GUI와 Java Websocket을 활용한 실시간 채팅 애플리케이션입니다.
 
 사용자 별 채팅 색 구분 및 자동 스크롤
 
-🙋‍♀️ 만든이
+## 🙋‍♀️ 만든이
 [shong69](https://github.com/shong69)
 
 ---
