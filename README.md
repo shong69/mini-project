@@ -14,7 +14,7 @@
 
 각 프로젝트 폴더에 들어가서 해당 `README.md` 파일의 실행 방법을 참고해주세요.
 
-```bash
+
 cd inkTalk  # 또는 jspProject
 # README.md 참고하여 실행
 📌 참고사항
@@ -26,7 +26,7 @@ cd inkTalk  # 또는 jspProject
 
 ## 📄 `inkTalk/README.md`
 
-```markdown
+
 # 💬 inkTalk
 
 GUI와 Java Websocket을 활용한 실시간 채팅 애플리케이션입니다.  
@@ -37,7 +37,7 @@ GUI와 Java Websocket을 활용한 실시간 채팅 애플리케이션입니다.
 - JAVA Websocket
 - Spring Framework
 
-```bash
+
 📌 기능
 실시간 채팅 기능
 
@@ -54,7 +54,7 @@ GUI와 Java Websocket을 활용한 실시간 채팅 애플리케이션입니다.
 
 ## 📄 `jspProject/README.md`
 
-```markdown
+
 # 📘 JSP 게시판 프로젝트
 
 기본적인 CRUD 기능이 포함된 JSP 기반 게시판 웹 애플리케이션입니다.
