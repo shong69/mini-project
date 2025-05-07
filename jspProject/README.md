@@ -28,6 +28,7 @@ JSP와 Servlet, MySQL을 활용한 간단한 영수증/거래 내역 관리 웹 
 
 ## 게시판 페이지
 - 게시글의 CRUD와 댓글, 대댓글 작성이 가능합니다.
+- 검색 기능과 페이징 기능을 사용합니다.
 ![게시판 페이지](https://github.com/shong69/mini-project/blob/main/images/board.png)
 ![게시글 페이지](https://github.com/shong69/mini-project/blob/main/images/detail.png)
 
