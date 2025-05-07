@@ -21,22 +21,22 @@ JSP와 Servlet, MySQL을 활용한 간단한 영수증/거래 내역 관리 웹 
 ## 메인페이지
 - slick slider을 사용한 캐러셀을 배치하였습니다.
 - 헤더에서 로그인상태에 따른 버튼 선택 분기처리(회원가입&로그인 혹은 로그아웃 선택 가능)를 하였습니다. 
-https://github.com/shong69/mini-project/blob/main/images/index.png
+![메인 페이지](https://github.com/shong69/mini-project/blob/main/images/index.png)
 
 ## intro 페이지
-https://github.com/shong69/mini-project/blob/main/images/intro.png
+![Intro 페이지](https://github.com/shong69/mini-project/blob/main/images/intro.png)
 
 ## 게시판 페이지
 - 게시글의 CRUD와 댓글, 대댓글 작성이 가능합니다.
-https://github.com/shong69/mini-project/blob/main/images/board.png
-https://github.com/shong69/mini-project/blob/main/images/detail.png
+![게시판 페이지](https://github.com/shong69/mini-project/blob/main/images/board.png)
+![게시글 페이지](https://github.com/shong69/mini-project/blob/main/images/detail.png)
 
 ## 로그인과 회원가입 페이지
 로그인 페이지
 - 유효성 체크를 통해 닉네임과 비밀번호를 미리 확인합니다.
-https://github.com/shong69/mini-project/blob/main/images/login.png
+![로그인 페이지](https://github.com/shong69/mini-project/blob/main/images/login.png)
 회원가입 페이지
-https://github.com/shong69/mini-project/blob/main/images/signup.png
+![회원가입 페이지](https://github.com/shong69/mini-project/blob/main/images/signup.png)
 - 정규표현식을 활용한 유효성 체크를 통해 형식을 가진 값을 가질 수 있습니다.
 # 🛠 기술 스택
 
